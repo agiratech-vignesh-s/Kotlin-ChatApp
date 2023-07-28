@@ -103,7 +103,7 @@ class LoginScreen : AppCompatActivity() {
                         editer.putString("PASSWORD",binding?.password?.text.toString())
                         editer.apply()
                         Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, MainActivity::class.java))
+                        startActivity(Intent(this, ProfileScreen::class.java))
                         finish()
                     } else {
                         Toast.makeText(
@@ -164,9 +164,13 @@ class LoginScreen : AppCompatActivity() {
                             Toast.makeText(this, "Sign In", Toast.LENGTH_LONG).show()
                             val firebaseUser: FirebaseUser = task.result!!.user!!
                             val registeredEmail = firebaseUser.email!!
-                            startActivity(Intent(this, MainActivity::class.java))
-                            finish()
-                            FirebaseAuth.getInstance().signOut()
+
+                            binding?.forgotPassword?.visibility = View.VISIBLE
+                            binding?.confirmPassword?.visibility = View.GONE
+                            binding?.btn?.text = "Sign In"
+                            binding?.Regester?.text = "Not a Member ?"
+                            binding?.RegesterName?.text = "Regester"
+
                         } else {
                             Toast.makeText(
                                 this,
